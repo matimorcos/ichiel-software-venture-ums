@@ -1,0 +1,6 @@
+@startuml Class Diagram
+skinparam Style strictuml
+skinparam SequenceMessageAlignment center
+A -> B : Hello
+A <- B : Hi
+@enduml

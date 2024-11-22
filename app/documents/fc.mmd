@@ -1,0 +1,86 @@
+---
+title: Users flowchart
+---
+flowchart TB
+    id1(Start)
+    id2[Home]
+    id3{Are you registrated?}
+    id4[Login]
+    id5[Registrate]
+    id6[/Username/]
+    id7{Correct Username?}
+    id8([Sorry! That Username is incorrect, try again.])
+    id9[/Password/]
+    id10{Correct Password?}
+    id11([Sorry! That password is incorrect, try again])
+    id12[/Mail adress or phone number/]
+    id13{Correct Mail or Phone?}
+    id14([Sorry! Incorrect data, try again])
+    id15[Verify process]
+    id16{Successfully verification?}
+    id17([Please, try a new verification])
+    id18([Great!, You are registrated, please login])
+    id19[/Username/]
+    id20{Correct Username?}
+    id21([Sorry! That Username is incorrect, try again.])
+    id22[/Password/]
+    id23{Correct Password?}
+    id24([Sorry! That password is incorrect, try again])
+    id25([Login Successfully! Welcome!])
+    id26[Menu]
+    id27[/Profile/]
+    id28[/Settings/]
+    id29[/Play/]
+    id30[/Host/]
+    id31[/Exit/]
+
+    
+
+
+
+
+    id1-->id2
+    id2-->id3
+    id3-->id4
+    id3-->id5
+    id5-->id6
+    id6-->id7
+    id7-->id8
+    id8-->id6
+    id7-->id9
+    id9-->id10
+    id10-->id11
+    id11-->id9
+    id10-->id12
+    id12-->id13
+    id13-->id14
+    id14-->id12
+    id13-->id15
+    id15-->id16
+    id16-->id17
+    id17-->id15
+    id16-->id18
+    id18-->id4
+    id4-->id19
+    id19-->id20
+    id20-->id21
+    id20-->id22
+    id21-->id19
+    id22-->id23
+    id23-->id24
+    id24-->id25
+    id25-->id26
+    id26-->id27
+    id26-->id28
+    id26-->id29
+    id26-->id30
+    id26-->id31
+
+
+
+
+
+
+
+
+
