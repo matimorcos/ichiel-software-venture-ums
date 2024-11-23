@@ -1,7 +1,7 @@
 # Users CRUD as UMS for a booking App
 
 <div align="center">
-    <img src="app/templates/components/logo1.png" alt="Logo" style="width: 100px; height: 100px;">
+    <img src="ums/users/static/components/logo1.png" alt="Logo" style="width: 100px; height: 100px;">
 </div>
 
 <div align="left">
