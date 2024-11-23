@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Ichiel Software Venture</title>
+</head>
+<body>
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <img src="{% static 'components/logo1.png' %}" alt="Logo" style="width:128px;height:128px;">
+    <h1>Bienvenido, {{ user.username }}!</h1>
+    <p>Has iniciado sesión correctamente.</p>
+    <br>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Cerrar sesión</button>
+    </form>
+</html>
