@@ -35,6 +35,17 @@ La clase SuperUser puede absorver a la clase User en una sola, dependiendo de co
 
 ## Architecture and Design
 El proyecto está estructurado en módulos que cumplen roles específicos dentro de la arquitectura:
+Why Python?
+Why Django?
+Which classes? Why?
+Which attr? Why?
+Which class attr? Why?
+What is the project scope? Whats next?
+Which methods? Why?
+There are any methods to do? Why?
+Why SQL?
+Why CSS for index page?
+Why Bootstrap for register, update and delete pages?
 
 - **`order_services`**: Gestiona la lógica de negocio de las órdenes, permitiendo crear, actualizar y gestionar órdenes.
 - **`email_services`**: Responsable de la configuración y el envío de notificaciones por correo electrónico.

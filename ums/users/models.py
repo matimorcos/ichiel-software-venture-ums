@@ -86,14 +86,3 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.updated_at = now()
         self.save()
 
-
-"""Modelo pendiente manejar funciones específicas para el proveedor"""
-class Provider(User):
-    """An specialized user type for providers."""
-    
-    class Meta:
-        proxy = True
-
-    def administer_facilities(self):
-        """Custom method for providers."""
-        pass
