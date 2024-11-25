@@ -71,21 +71,17 @@ Para ejecutar la app, abrir el archivo main.py posicionados en su carpeta, y eje
 Archivo funcions.py: Contiene la logica de negocio, se recomienda utilizarlo como guia.
 
 Iteraciones:
-Roles del Usuario:
-Los roles de la clase User podrian heredarse en dos clases diferentes, Customer y Provider, manteniendose User como base, y estas dos segun el caso de uso por el usuario, o por otro lado, podrian mantenerse dichos roles y anadirse los casos de uso y manejo en la clase SuperUser para que administre estas interacciones que pueden ser simultaneas en un mismo usuario, es decir, un usuario puede proveer una instalacion y a la vez ser consumidor de una.
-
-Clases:
-La posible iteracion descripta ut supra, aun sin definirse, despierta la duda de si sera necesaria la creacion de las clases Facility (Instalacion), Shifts(Turnos ofrecidos por el Provider) y Bookings(Reservas realizadas por el Customer), o la combinacion de las mismas dentro de las hipoteticas clases Customer y Provider, o incluso, la integracion de de Shifts y Bookings como una instancia de la clase independiente Facility.
-
-Seguridad:
-Prevenciones pendientes.
-
-Atributos:
-Como atributos pendientes de anadirse a la clase User se encuentran: user_dni (o documentacion que acredite identidad), fecha de nacimiento (para impedimento de registro y restriccion de determinados permisos y accesos a menores de edad).
+Requerimientos de datos payment method y credenciales oficiales al usuario en caso de registro de facilities.
+Doble entry de password para evitar errores
+Validacion asincrona de los inputs de login y registro
+mejora de frontend login y register
+desarrollo de dashboard login.html como homepage con feed
+desarrollo de profile.html con vinculos para ir hacia atras
+pruebas de conexion a DB 
 
 ## Testing
-Errores:
-Como unico error tecnico en esta version del programa, se observo la imposibilidad del usuario Customer de eliminar su propia cuenta.
+Issues:
+En esta etapa del desarrollo no se observaron errores
 
 ## Contributions
 
