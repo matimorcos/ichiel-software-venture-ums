@@ -101,7 +101,17 @@ class CustomLoginView(View):
 def dashboard_view(request):
     
     return render(request, 'login.html', {'user': request.user})
-    
+
+@login_required
+def home_view(request):
+
+    return render(request, 'home.html', {'user': request.user})
+
+@login_required
+def profile_view(request):
+
+    return render(request, 'profile.html', {'user': request.user})
+
 def logout_view(request):
     logout(request)  
     return redirect('/')  
