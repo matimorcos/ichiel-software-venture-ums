@@ -10,15 +10,15 @@
 
 ## Table of contents
 
-- [Description](#descripción)
+- [Description](#Description)
 - [Architecture](#Architecture)
 - [Design](#Design)
-- [Installation and Configuration](#instalación-y-configuración)
-- [Uses](#uso)
-- [Testing](#testing)
-- [Contributions](#contribuciones)
-- [License](#licencia)
-- [Security](#política-de-seguridad)
+- [Installation and Configuration](#Installation-and-Configuration)
+- [Uses](#Uses)
+- [Testing](#Testing)
+- [Contributions](#Contributions)
+- [License](#License)
+- [Security](#Security)
 
 ---
 
