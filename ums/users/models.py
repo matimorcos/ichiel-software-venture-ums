@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils.timezone import now
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class UserManager(BaseUserManager):
     """Custom user manager for creating users and superusers."""
@@ -18,6 +20,7 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, username, password=None, **extra_fields):
+        """ Create and return a new superuser."""
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
 
@@ -64,12 +67,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ["email", "first_name", "last_name"]
     
     def __str__(self):
+        """Return user username."""
         return f"{self.username} ({self.role})"
 
     def has_perm(self, perm, obj=None):
+        """Return True if the user has the specified permission."""
         return True
 
     def has_module_perms(self, app_label):
+        """Return True if the user has permissions to view the specified app."""
         return True
 
     def delete_user(self):
@@ -86,3 +92,28 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.updated_at = now()
         self.save()
 
+class Profile(models.Model):
+    """Profile model."""
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    birthdate = models.DateField(null=True, blank=True)
+    country = models.CharField(max_length=100, blank=True)
+    city = models.CharField(max_length=100, blank=True)
+    address = models.CharField(max_length=255, blank=True)
+    phone_number = models.CharField(max_length=15, blank=True)
+    
+    def __str__(self):
+        """Return user username."""
+        return self.user.username
+    
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        """ Create user profile when a new user is created """
+        if created:
+            Profile.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        """ Save user profile when a user is saved """
+        instance.profile.save()
+        
+    

@@ -3,9 +3,11 @@ from .models import User
 from django.contrib.auth import authenticate
 
 class RegisterSerializer(serializers.ModelSerializer):
+    """Serializer for registering a new user."""
     password = serializers.CharField(write_only=True)
 
     class Meta:
+        """Meta class for RegisterSerializer."""
         model = User
         fields = [
             "email",
@@ -23,6 +25,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
+        """Create and return a new user."""
         user = User.objects.create_user(
             email=validated_data["email"],
             username=validated_data["username"],
@@ -39,10 +42,12 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 class LoginSerializer(serializers.Serializer):
+    """Serializer for user authentication."""
     username = serializers.CharField()
     password = serializers.CharField(write_only=True)
 
     def validate(self, data):
+        """Validate user credentials."""
         user = authenticate(username=data["username"], password=data["password"])
         if not user:
             raise serializers.ValidationError("Credenciales incorrectas.")
