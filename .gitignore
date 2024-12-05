@@ -37,6 +37,8 @@ MANIFEST
 *.spec
 
 # Django stuff:
+ums/users/viewz
+ums/users/templates/profile.html
 ums/users/migrations
 ums/ums/settings.py
 ums/ums/asgi.py

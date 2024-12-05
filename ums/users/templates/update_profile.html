@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- DJANGO STATIC -->
     {% load static %}
+    {% load crispy_forms_tags %}
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <!-- JQUERY -->
@@ -13,72 +14,85 @@
     <!-- JS -->
     <script>
         function enableEdit() {
-            const inputs = document.querySelectorAll(".profile-form input");
+            const inputs = document.querySelectorAll(".profile-form input, .profile-form select, .profile-form textarea");
             inputs.forEach(input => input.disabled = false);
             document.getElementById("save-btn").disabled = false;
         }
     </script>
     <title>Editar Perfil</title>
 </head>
-<!-- MAIN CONTAINERS -->
-<div class="index-top">
-    <div class="logo-img">
-        <img src="{% static 'components/logo2.png' %}">
-    </div>
-    <div class="titles-txt">
-        <h1>Perfil de {{ user.username }}</h1>
-    </div>
-</div>
-<!-- BODY CONTAINERS-->
 <body>
-    <div class="update-profile">
-    <form action="{% url 'update_profile' %}" method="post" class="profile-form">
+    <!-- MAIN CONTAINERS -->
+    <div class="index-top">
+        <div class="logo-img">
+            <img src="{% static 'components/logo2.png' %}">
+        </div>
+        <div class="titles-txt">
+            <h1>Perfil</h1>
+        </div>
+    </div>
+    <div class="dashboard">
+        <form action="{% url 'home' %}" method="post">
+            <button type="submit">
+                Inicio
+                <img src="{% static 'components/home.png' %}" alt="Inicio" class="home-icon">
+            </button>
             {% csrf_token %}
-        <div class="mb-3 row">
-            <label for="email" class="col-sm-3 col-form-label">Email</label>
-            <div class="col-sm-9">
-                <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" disabled>
-            </div>
-        </div>
-        <div class="mb-3 row">
-            <label for="username" class="col-sm-3 col-form-label">Usuario</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" disabled>
-            </div>
-        </div>
-        <div class="mb-3 row">
-            <label for="birthdate" class="col-sm-3 col-form-label">Fecha de Nacimiento</label>
-            <div class="col-sm-9">
-                <input type="date" class="form-control" id="birthdate" name="birthdate" value="{{ user.profile.birthdate }}" disabled>
-            </div>
-        </div>
-        <div class="mb-3 row">
-            <label for="country" class="col-sm-3 col-form-label">País</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="country" name="country" value="{{ user.profile.country }}" disabled>
-            </div>
-        </div>
-        <div class="mb-3 row">
-            <label for="city" class="col-sm-3 col-form-label">Ciudad</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="city" name="city" value="{{ user.profile.city }}" disabled>
-            </div>
-        </div>
-        <div class="mb-3 row">
-            <label for="address" class="col-sm-3 col-form-label">Dirección</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="address" name="address" value="{{ user.profile.address }}" disabled>
-            </div>
-        </div>
-        <div class="mb-3 row">
-            <label for="phone_number" class="col-sm-3 col-form-label">Teléfono</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ user.profile.phone_number }}" disabled>
-            </div>
-        </div>
-        <button type="button" class="btn btn-secondary" onclick="enableEdit()">Editar Perfil</button>
-        <button type="submit" class="btn btn-primary" id="save-btn" disabled>Guardar Cambios</button>
-    </form>
+        </form>
+        <form action="{% url 'update_profile' %}" method="post">
+            <button type="submit">
+                Perfil
+                <img src="{% static 'components/profile.png' %}" alt="Perfil" class="profile-icon">
+            </button>
+            {% csrf_token %}
+        </form>
+        <form action="{% url 'logout' %}" method="post">
+            <button type="submit">
+                Cerrar sesión
+                <img src="{% static 'components/logout.png' %}" alt="Cerrar sesión" class="logout-icon">
+            </button>
+            {% csrf_token %}
+        </form>
+    </div>
+    <!-- BODY CONTAINERS-->
+    <div class="profile-info">
+        <form action="{% url 'update_profile' %}" method="post" class="profile-form">
+            {% csrf_token %}
+            
+            <h1>Perfil de {{ user.username }}</h1>
+            
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" value="{{ user.email }}" disabled>
+            
+            <label for="first_name">Nombre:</label>
+            <input type="text" name="first_name" id="first_name" value="{{ user.first_name }}" disabled>
+            
+            <label for="last_name">Apellido:</label>
+            <input type="text" name="last_name" id="last_name" value="{{ user.last_name }}" disabled>
+            
+            <label for="birthdate">Fecha de nacimiento:</label>
+            <input type="date" name="birthdate" id="birthdate" value="{{ profile.birthdate }}" disabled>
+            
+            <label for="country">País:</label>
+            <input type="text" name="country" id="country" value="{{ profile.country }}" disabled>
+            
+            <label for="city">Ciudad:</label>
+            <input type="text" name="city" id="city" value="{{ profile.city }}" disabled>
+            
+            <label for="address">Dirección:</label>
+            <input type="text" name="address" id="address" value="{{ profile.address }}" disabled>
+            
+            <label for="phone_number">Teléfono:</label>
+            <input type="text" name="phone_number" id="phone_number" value="{{ profile.phone_number }}" disabled>
+            
+            <!-- ERROR MESSAGE -->
+            {% if error %}
+            <p style="color: red;">{{ error }}</p>
+            {% endif %}
+            
+            <button type="button" class="btn btn-secondary" onclick="enableEdit()">Editar Perfil</button>
+            <button type="submit" class="btn btn-primary" id="save-btn" disabled>Guardar Cambios</button>
+        </form>
     </div>
 </body>
 </html>

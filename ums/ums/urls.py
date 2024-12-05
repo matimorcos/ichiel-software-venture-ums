@@ -16,17 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from users.views import CustomLoginView, register_view, logout_view, dashboard_view, home_view, profile, update_profile, search_users
+from users.views import LoginTemplateView, LoginAPIView, RegisterTemplateView, RegisterSerializerTemplateView, HomeTemplateView, SearchUsersView, ProfileTemplateView, UpdateProfileTemplateView, LogoutTemplateView 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', CustomLoginView.as_view(), name='login'),
-    path("dashboard/", dashboard_view, name="dashboard"),
-    path('home/', home_view, name='home'),
-    path('search-users/', search_users, name='search_users'),
-    path('profile/', profile, name='profile'),
-    path('profile/update/', update_profile, name='update_profile'),
-    path('logout/', logout_view, name='logout'),
-    path('register/', register_view, name='register'),
+    path('', LoginTemplateView.as_view(), name='login'),
+    #path('login/', LoginAPIView.as_view(), name='login'),
+    #path('register/', RegisterTemplateView.as_view(), name='register'),
+    path('register/', RegisterSerializerTemplateView.as_view(), name='register'),
+    path('home/', HomeTemplateView.as_view(), name='home'),
+    path('search-users/', SearchUsersView.as_view(), name='search-users'),
+    path('update_profile/', ProfileTemplateView.as_view(), name='update_profile'),
+    #path('update_profile/', UpdateProfileTemplateView.as_view(), name='update_profile'),
+    path('logout/', LogoutTemplateView.as_view(), name='logout'),
 ]
 

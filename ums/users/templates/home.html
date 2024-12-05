@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- DJANGO STATIC -->
     {% load static %}
+    {% load crispy_forms_tags %}
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <title>Ichiel Software Venture</title>
@@ -28,8 +29,9 @@
             <img src="{% static 'components/home.png' %}" alt="Inicio" class="home-icon">
         </button>
         {% csrf_token %}
+        {{ form|crispy }}
     </form>
-    <form action="{% url 'profile' %}" method="post">
+    <form action="{% url 'update_profile' %}" method="post">
         <button type="submit">
             Perfil
             <img src="{% static 'components/profile.png' %}" alt="Perfil" class="profile-icon">

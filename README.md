@@ -110,6 +110,7 @@ Sigue estos pasos para instalar y ejecutar el programa localmente.
 ## Use
 
 ## Testing
+En proximas iteraciones el usuario debera poder registrarse unicamente con su email mediante metodos de verificacion y autenticacion, y podra editar su perfil una vez loggeado, el cual contendra los campos requeridos para determinadas acciones dentro de la app. A su vez, tambien se deberan visualizarse los mensajes y botones con detalles para una UI mas intuitiva qe ofrezca una mejor experiencia.
 
 ## Contributions
 

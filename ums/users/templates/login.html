@@ -36,7 +36,7 @@
         </button>
         {% csrf_token %}
     </form>
-    <form action="{% url 'logout' %}" method="post">
+    <form action="{% url 'logout' %}" method="POST">
         <button type="submit">
             Cerrar sesión
             <img src="{% static 'components/logout.png' %}" alt="Cerrar sesión" class="logout-icon">

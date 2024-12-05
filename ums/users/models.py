@@ -5,7 +5,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 class UserManager(BaseUserManager):
-    """Custom user manager for creating users and superusers."""
+    """User manager for creating users and superusers for specific validations accurate as
+    the obligatory email and username."""
     
     def create_user(self, email, username, password=None, **extra_fields):
         if not email:
@@ -32,27 +33,33 @@ class UserManager(BaseUserManager):
         return self.create_user(email, username, password, **extra_fields)
     
 class User(AbstractBaseUser, PermissionsMixin):
-    """Custom User model."""
+    """User Django default model extended for manage additional fields, like role, adress, etc.
+    This inherits from PermissionsMixin, allowing you to use Django's default permissions system,
+    and overrides methods like has_perm and has_module_perms. Custom logic can be implemented
+    if necessary."""
     email = models.EmailField(unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     
+    
+    """Avoid multiple users models creations for each role, simplyfing code mantenance differentiating
+    users behavior and autorization."""
     ROLES = (
         ("Customer", "Customer"),
         ("Provider", "Provider"),
     )
     
-    email = models.EmailField(unique=True, max_length=255)
-    username = models.CharField(unique=True, max_length=150)
-    password = models.CharField(max_length=128)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    birthdate = models.DateField(blank=True, null=True)
-    country = models.CharField(max_length=50)
-    city = models.CharField(max_length=50)
-    postal_code = models.CharField(max_length=20, blank=True, null=True)
-    address = models.TextField(blank=True, null=True)
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
+    email = models.EmailField(unique=True, max_length=255, verbose_name="email address")
+    username = models.CharField(unique=True, max_length=150, verbose_name="username")
+    password = models.CharField(max_length=128, verbose_name="password")
+    first_name = models.CharField(max_length=50, verbose_name="first name")
+    last_name = models.CharField(max_length=50, verbose_name="last name")
+    birthdate = models.DateField(blank=True, null=True, verbose_name="birthdate")
+    country = models.CharField(max_length=50, blank=True, null=True)
+    city = models.CharField(max_length=50, verbose_name="city")
+    postal_code = models.CharField(max_length=20, blank=True, null=True, verbose_name="postal code")
+    address = models.TextField(blank=True, null=True, verbose_name="address")
+    phone_number = models.CharField(max_length=15, blank=True, null=True, verbose_name="phone number")
     role = models.CharField(max_length=10, choices=ROLES, default="Customer")
     created_at = models.DateTimeField(default=now)
     updated_at = models.DateTimeField(auto_now=True)
@@ -79,7 +86,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         return True
 
     def delete_user(self):
-        """Soft delete a user."""
+        """Soft delete a user marking them as inactive to comply with privacy regulations 
+        and preserve referential integrity in the database."""
         self.is_active = False
         self.deleted_at = now()
         self.save()
@@ -93,7 +101,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.save()
 
 class Profile(models.Model):
-    """Profile model."""
+    """Profile model. This avoids overloading the User model with too much information."""
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     birthdate = models.DateField(null=True, blank=True)
     country = models.CharField(max_length=100, blank=True)
@@ -107,7 +115,9 @@ class Profile(models.Model):
     
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
-        """ Create user profile when a new user is created """
+        """ Post save signal to automatically create and update a profile when a user is saved.
+        This separates responsibilities (account data in User and personal data in Profile),
+        which follows the Single Responsibility Principle design principle."""
         if created:
             Profile.objects.create(user=instance)
 

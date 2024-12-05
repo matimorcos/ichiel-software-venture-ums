@@ -55,3 +55,4 @@ class LoginSerializer(serializers.Serializer):
             raise serializers.ValidationError("La cuenta está desactivada.")
         return {"user": user}
 
+    

@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users',
+    'crispy_forms',
+    'crispy_bootstrap5',
+    'users.apps.UsersConfig',
     'rest_framework',
     'rest_framework.authtoken', 
 ]
@@ -69,6 +71,10 @@ TEMPLATES = [
         },
     },
 ]
+
+"""Crispy forms settings"""
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # Backend predeterminado

@@ -3,6 +3,7 @@
 <head>
     <!-- DJANGO STATIC -->
     {% load static %}
+    {% load crispy_forms_tags %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,18 +26,16 @@
         <h2>Inicia sesión o registrate</h2>
     </div>
     <div class = "index-form">
-        <form action="" method="post" id="loginForm">
+        <form action="{% url 'login' %}" method="POST">
         <!-- CSRF TOKEN -->
         {% csrf_token %}
+
+        {{ form|crispy }}
         <!-- ERROR MESSAGE -->
         {% if error %}
             <p style="color: red;">{{ error }}</p>
         {% endif %}
-        <p><label for="username">Username</label></p>
-        <input type="text" id="username" name="username" required>
-        <p><label for="password">Password</label></p>
-        <input type="password" id="password" name="password" required>
-        <br>
+        
         <button type="submit">Iniciar Sesión</button>
         <p style="color:blue;">No tienes una cuenta?</p>
         <!-- REGISTER PAGE LINK -->
