@@ -21,6 +21,6 @@ class RegisterForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model=User
-        fields=['email', 'username', 'country', 'city', 'postal_code', 'address', 'phone_number']   
+        fields=['email','first_name', 'last_name', 'birthdate', 'country', 'city', 'postal_code', 'address', 'phone_number']   
 
     

@@ -22,6 +22,14 @@
 </div>
 <!-- BODY CONTAINERS-->
 <body class = "body">
+    <!-- MESSAGES -->
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}    
     <div class = "titles-txt">
         <h2>Inicia sesión o registrate</h2>
     </div>

@@ -31,7 +31,7 @@
         {% csrf_token %}
         {{ form|crispy }}
     </form>
-    <form action="{% url 'update_profile' %}" method="post">
+    <form action="{% url 'profile' %}" method="post">
         <button type="submit">
             Perfil
             <img src="{% static 'components/profile.png' %}" alt="Perfil" class="profile-icon">
@@ -48,6 +48,14 @@
 </div>
 <!-- BODY CONTAINERS-->
 <body>
+    <!-- MESSAGES -->
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <div class="search-container">
         <div class="search-bar">
             <input type="text" id="search-input" placeholder="Buscar usuarios...">

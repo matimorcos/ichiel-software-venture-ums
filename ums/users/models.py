@@ -49,7 +49,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         ("Provider", "Provider"),
     )
     
-    email = models.EmailField(unique=True, max_length=255, verbose_name="email address")
+    email = models.EmailField(unique=True, max_length=255, verbose_name="email")
     username = models.CharField(unique=True, max_length=150, verbose_name="username")
     password = models.CharField(max_length=128, verbose_name="password")
     first_name = models.CharField(max_length=50, verbose_name="first name")

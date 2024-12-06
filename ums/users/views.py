@@ -11,6 +11,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.messages import get_messages
 from django.db.models import Q
 
 class LoginTemplateView(View):
@@ -34,9 +35,10 @@ class LoginTemplateView(View):
         """ If the user is authenticated, log him in and redirect to the dashboard ('/dashboard/'). """
         if user is not None:
             login(request, user)  
+            messages.success(request, "Inicio de sesión exitoso.")
             return redirect('/home/')  
         else:
-            
+            messages.error(request, "Credenciales incorrectas. Inténtalo nuevamente.")
             return render(request, self.template_name, {'error': 'Credenciales inválidas'})
 
 class LoginAPIView(APIView):    
@@ -109,9 +111,13 @@ class RegisterTemplateView(View):
             try:
                 user = form.save()
                 messages.success(request, 'Registro exitoso, ahora puedes iniciar sesión.')
+                storage = get_messages(request)
+                list(storage)
                 return redirect('login')
             except Exception as e:
                 messages.error(request, f'Error al registrar: {e}')
+                storage = get_messages(request)
+                list(storage)
         return render(request, self.template_name, {'form': form})
 
 @method_decorator(login_required, name='dispatch')
@@ -138,39 +144,32 @@ class SearchUsersView(View):
 
 @method_decorator(login_required, name='dispatch')
 class ProfileTemplateView(View):
-    template_name = 'update_profile.html'
+    template_name = 'profile.html'
 
     def get(self, request):
-        form = ProfileForm()
+        form = ProfileForm(instance=request.user)
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
-        user = request.user
-        profile = user.profile
-        # Actualización de datos DE USUARIO
-        user.first_name = request.POST.get('first_name', user.first_name)
-        user.last_name = request.POST.get('last_name', user.last_name)
-        user.email = request.POST.get('email', user.email)
-        user.save()
+        form = ProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            user = form.save()
+            profile = user.profile
+            profile.birthdate = request.POST.get('birthdate', profile.birthdate)
+            profile.country = request.POST.get('country', profile.country)
+            profile.city = request.POST.get('city', profile.city)
+            profile.address = request.POST.get('address', profile.address)
+            profile.phone_number = request.POST.get('phone_number', profile.phone_number)
+            profile.save()
 
-        # Actualización de datos DE PERFIL
-        profile.birthdate = request.POST.get('birthdate', profile.birthdate)
-        profile.country = request.POST.get('country', profile.country)
-        profile.city = request.POST.get('city', profile.city)
-        profile.address = request.POST.get('address', profile.address)
-        profile.phone_number = request.POST.get('phone_number', profile.phone_number)
-        profile.save()
-
-        messages.success(request, 'Perfil actualizado exitosamente.')
-        return redirect('update_profile')
-
-class UpdateProfileTemplateView(View):
-    template_name = 'update_profile.html'
-
-    def get(self, request):
-        form = ProfileForm()
+            messages.success(request, 'Perfil editado exitosamente.')
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
+                    
         return render(request, self.template_name, {'form': form})
-    
+
 class LogoutTemplateView(View):
     template_name = 'index.html'
     

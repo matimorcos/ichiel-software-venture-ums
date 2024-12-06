@@ -19,7 +19,14 @@
         <img src="{% static 'components/logo2.png' %}" alt="Logo" class="img-fluid mb-3" style="max-height: 100px;">
         <h1>ICL Software Venture</h1>
     </div>
-
+    <!-- MESSAGES -->
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <!-- REGISTER FORM -->
     <div class="container mt-4">
         <div class="row justify-content-center">
@@ -34,19 +41,6 @@
 
                             <button type="submit" class="btn btn-primary w-100 mt-3">Registrarse</button>
                         </form>
-
-                        <!-- Mensajes de respuesta -->
-                        {% if 'ok' in request.GET %}
-                            <div class="alert alert-success mt-3">
-                                <strong>Usuario creado correctamente</strong>
-                            </div>
-                        {% endif %}
-
-                        {% if 'e' in request.GET %}
-                            <div class="alert alert-danger mt-3">
-                                <strong>Error al crear el usuario</strong>
-                            </div>
-                        {% endif %}
                     </div>
                 </div>
             </div>
