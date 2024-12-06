@@ -13,12 +13,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Ichiel Software Venture</title>
 </head>
-<body>
-    <!-- HEADER -->
-    <div class="container text-center py-4">
-        <img src="{% static 'components/logo2.png' %}" alt="Logo" class="img-fluid mb-3" style="max-height: 100px;">
+<div class = "index-top">
+    <div class = "logo-img">
+        <img src="{% static 'components/logo2.png' %}">
+    </div>
+    <div class = "titles-txt">
         <h1>ICL Software Venture</h1>
     </div>
+</div>
+<body class = "body">
     <!-- MESSAGES -->
     {% if messages %}
     <ul class="messages">
