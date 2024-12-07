@@ -23,4 +23,4 @@ class ProfileForm(forms.ModelForm):
         model=User
         fields=['email','first_name', 'last_name', 'birthdate', 'country', 'city', 'postal_code', 'address', 'phone_number']   
 
-    
+# Cuando hagas Serializers y forms, los fields trata de acomodarlos siempre en orden alfabetico. Esto ayuda mucho a la hora de revisar los campos y encontrarlos.

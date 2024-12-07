@@ -74,7 +74,7 @@ class RegisterSerializerTemplateView(View):
             password = request.POST['password']
             first_name = request.POST['first_name']
             last_name = request.POST['last_name']
-            birthdate = request.POST['birthdate']
+            birthdate = request.POST['birthdate']  # si no usas estos datos borralos.
             country = request.POST['country']
             city = request.POST['city']
             postal_code = request.POST['postal_code']
