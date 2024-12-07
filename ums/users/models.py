@@ -37,17 +37,17 @@ class User(AbstractBaseUser, PermissionsMixin):
     This inherits from PermissionsMixin, allowing you to use Django's default permissions system,
     and overrides methods like has_perm and has_module_perms. Custom logic can be implemented
     if necessary."""
-    email = models.EmailField(unique=True)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    email = models.EmailField(unique=True)        #
+    is_active = models.BooleanField(default=True) #  No entiendo porque repetis estos campos abajo.
+    is_staff = models.BooleanField(default=False) #
     
     
     """Avoid multiple users models creations for each role, simplyfing code mantenance differentiating
-    users behavior and autorization."""
+    users behavior and autorization.""" # La estructura del docstring siempre van al comienzo de la definicion de la func.
     ROLES = (
         ("Customer", "Customer"),
         ("Provider", "Provider"),
-    )
+    ) # La definicion de las variables de este tipo van al comienzo, eliminando las 3 primeras quedaria bien.
     
     email = models.EmailField(unique=True, max_length=255, verbose_name="email")
     username = models.CharField(unique=True, max_length=150, verbose_name="username")
@@ -70,7 +70,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     objects = UserManager()
     
-    USERNAME_FIELD = "username"
+    USERNAME_FIELD = "username" # Asegurate que sea required=True en el form.
     REQUIRED_FIELDS = ["email", "first_name", "last_name"]
     
     def __str__(self):
@@ -78,11 +78,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         return f"{self.username} ({self.role})"
 
     def has_perm(self, perm, obj=None):
-        """Return True if the user has the specified permission."""
+        """Return True if the user has the specified permission."""               # Agregar las validaciones correspondientes.
         return True
 
     def has_module_perms(self, app_label):
-        """Return True if the user has permissions to view the specified app."""
+        """Return True if the user has permissions to view the specified app.""" # lo mismo aca.
         return True
 
     def delete_user(self):
