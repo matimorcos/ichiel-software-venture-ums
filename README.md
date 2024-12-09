@@ -80,19 +80,51 @@ Para más detalles sobre la arquitectura del sistema, consulta los diagramas en 
 
 ## Design
 1) Organizacion de directorios: El programa cuenta con la siguiente arquitectura limpia y modular.
-- `ums/`:
-- `ums/ums`: Configuración del proyecto.
-- `ums/users/`: Modelos, vistas, serializadores, apps.
-- `tests/`: Pruebas unitarias e integración.
+- `ums/`: ums (Settings), users (Aplicacion), database, manage file.
+- `ums/ums`: Settings, asgi, wsgi, urls.
+- `ums/users/`: Modelos, vistas, formularios, serializadores, apps, tests, admin. (Se reestructurara cada uno en nuevas carpetas pertinentes)
+- `ums/users/`: Migraciones, Static, Templates.
+- `ums/users/static`: Componentes, CSS, JS.
 2) Modelos, atributos, atributos de clases, metodos:
 - `UserManager`:
 - `User`: Modelo principal para gestionar usuarios.
 - `Profile`: Se extiende sobre el modelo `User` para manejar sus datos adicionales.
-3) Endpoints REST y/u otros metodos (Admin., pendientes de inclusion):
-- `GET /users/`: Lista de usuarios.
-- `POST /users/`: Crear usuario.
-- `PUT /users/<id>/`: Actualizar usuario.
-- `DELETE /users/<id>/`: Eliminar usuario.
+3) Endpoints:
+Successful Register:
+- `GET / HTTP/1.1` 200
+- `GET /static/components/logo2.png HTTP/1.1` 200
+- `GET /static/css/styles.css HTTP/1.1` 200
+- `GET /register/ HTTP/1.1` 200
+- `POST /register/ HTTP/1.1` 302
+- `GET / HTTP/1.1` 200
+
+Successful Login:
+- `GET / HTTP/1.1` 200
+- `GET /static/components/logo2.png HTTP/1.1` 200
+- `GET /static/css/styles.css HTTP/1.1` 200
+- `POST / HTTP/1.1` 302
+- `GET /home/ HTTP/1.1` 200
+- `GET /static/components/home.png HTTP/1.1` 200
+- `GET /static/components/logout.png HTTP/1.1` 200
+- `GET /static/components/profile.png HTTP/1.1` 200
+- `GET /static/js/search.js HTTP/1.1` 200
+- `GET /static/components/feed.png HTTP/1.1` 200
+
+Successful Home (Feed load):
+- `POST /home/ HTTP/1.1` 200
+
+Successful User Search:
+- `GET /search-users/?query=a HTTP/1.1` 200
+
+Successful Profile (View):
+- `POST /profile/ HTTP/1.1"` 200
+
+Successful Profile (Edit):
+- `POST /profile/ HTTP/1.1` 200
+
+Successful Logout:
+- `POST /logout/ HTTP/1.1"` 302
+
 4) Logica de Negocio (Redireccion a 'project branch'):
 5) Estilo de codificacion:
 - Separación de responsabilidades: Cada módulo tiene una única responsabilidad.
