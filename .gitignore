@@ -1,5 +1,7 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+*/__pycache__/
+**/__pycache__/    
 *.py[cod]
 *$py.class
 
@@ -7,6 +9,8 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+setup.py
+MANIFEST.in
 .Python
 build/
 develop-eggs/
@@ -31,6 +35,14 @@ MANIFEST
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
+
+# Django stuff:
+ums/users/viewz
+ums/users/templates/profile.html
+ums/users/migrations
+ums/ums/settings.py
+ums/ums/asgi.py
+ums/ums/wsgi.py
 
 # Installer logs
 pip-log.txt
@@ -106,10 +118,8 @@ ipython_config.py
 #pdm.lock
 #   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
 #   in version control.
-#   https://pdm.fming.dev/latest/usage/project/#working-with-version-control
+#   https://pdm.fming.dev/#use-with-ide
 .pdm.toml
-.pdm-python
-.pdm-build/
 
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
 __pypackages__/
@@ -117,6 +127,9 @@ __pypackages__/
 # Celery stuff
 celerybeat-schedule
 celerybeat.pid
+
+# JSON files:
+users.json
 
 # SageMath parsed files
 *.sage.py
@@ -160,3 +173,8 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+.Scripts
+Scripts
+.idea
+.vscode
+pyvenv.cfg

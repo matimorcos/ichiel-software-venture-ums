@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- DJANGO STATIC -->
+    {% load static %}
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Ichiel Software Venture</title>
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<!-- MAIN CONTAINERS -->
+<div class = "index-top">
+    <div class = "logo-img">
+        <img src="{% static 'components/logo2.png' %}">
+    </div>
+    <div class = "titles-txt">
+        <h1>Bienvenido {{ user.username }}!</h1>
+    </div>
+</div>
+<div class="dashboard">
+    <form action="{% url 'home' %}" method="post">
+        <button type="submit">
+            Inicio
+            <img src="{% static 'components/home.png' %}" alt="Inicio" class="home-icon">
+        </button>
+        {% csrf_token %}
+    </form>
+    <form action="{% url 'profile' %}" method="post">
+        <button type="submit">
+            Perfil
+            <img src="{% static 'components/profile.png' %}" alt="Perfil" class="profile-icon">
+        </button>
+        {% csrf_token %}
+    </form>
+    <form action="{% url 'logout' %}" method="POST">
+        <button type="submit">
+            Cerrar sesión
+            <img src="{% static 'components/logout.png' %}" alt="Cerrar sesión" class="logout-icon">
+        </button>
+        {% csrf_token %}
+    </form>
+</div>
+<!-- BODY CONTAINERS-->
+<body>
+    <!-- MESSAGES -->
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="search-container">
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Buscar usuarios...">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </div>
+    <!-- JS LINK -->
+    <script src="{% static 'js/search.js' %}"></script>
+</body>
+</html>

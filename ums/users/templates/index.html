@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- DJANGO STATIC -->
+    {% load static %}
+    {% load crispy_forms_tags %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ichiel Software Venture</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<!-- MAIN CONTAINERS -->
+<div class = "index-top">
+    <div class = "logo-img">
+        <img src="{% static 'components/logo2.png' %}">
+    </div>
+    <div class = "titles-txt">
+        <h1>ICL Software Venture</h1>
+    </div>
+</div>
+<!-- BODY CONTAINERS-->
+<body class = "body">
+    <!-- MESSAGES -->
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}    
+    <div class = "titles-txt">
+        <h2>Inicia sesión o registrate</h2>
+    </div>
+    <div class = "index-form">
+        <form action="{% url 'login' %}" method="POST">
+        <!-- CSRF TOKEN -->
+        {% csrf_token %}
+
+        {{ form|crispy }}
+        <!-- ERROR MESSAGE -->
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+        
+        <button type="submit">Iniciar Sesión</button>
+        <p style="color:blue;">No tienes una cuenta?</p>
+        <!-- REGISTER PAGE LINK -->
+        <a href="{% url 'register' %}">Registrarse</a>
+        </form>
+    </div>  
+</body>
+</html>
