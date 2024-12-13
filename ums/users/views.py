@@ -170,6 +170,34 @@ class ProfileTemplateView(View):
                     
         return render(request, self.template_name, {'form': form})
 
+class NotificationsTemplateView(View):
+    template_name = 'notifications.html'
+    
+    def get(self, request):
+        return render(request, self.template_name, {'user': request.user})
+    
+    def post(self, request):
+        return render(request, self.template_name, {'user': request.user}) 
+    
+class MyBookingsTemplateView(View):
+    template_name = 'mybookings.html'
+    
+    def get(self, request):
+        return render(request, self.template_name, {'user': request.user})
+
+    def post(self, request):
+        return render(request, self.template_name, {'user': request.user})
+
+@method_decorator(login_required, name='dispatch')
+class PartnershipTemplateView(View):
+    template_name = 'partnership.html'
+    
+    def get(self, request):
+        return render(request, self.template_name, {'user': request.user})
+
+    def post(self, request):
+        return render(request, self.template_name, {'user': request.user})
+    
 class LogoutTemplateView(View):
     template_name = 'index.html'
     
