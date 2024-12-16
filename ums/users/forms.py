@@ -12,7 +12,7 @@ class LoginForm(forms.ModelForm):
 class RegisterForm(forms.ModelForm):
     class Meta:
         model=User
-        fields=['email', 'username', 'password', 'first_name', 'last_name', 'birthdate', 'country', 'city', 'postal_code', 'address', 'phone_number']
+        fields=['address', 'birthdate', 'city', 'country', 'email', 'first_name', 'last_name', 'password', 'phone_number', 'postal_code', 'username']
         widgets = {
             'birthdate': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'password': forms.PasswordInput(attrs={'class': 'form-control'}),

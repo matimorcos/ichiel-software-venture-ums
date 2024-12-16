@@ -61,13 +61,13 @@
             </button>
             {% csrf_token %}
         </form>
-    <form action="{% url 'partnership' %}" method="post">
-        <button type="submit">
-            Socios
-            <img src="{% static 'components/partnership.png' %}" alt="Socios" class="partnership-icon">
-        </button>
-        {% csrf_token %}
-    </form>
+        <form action="{% url 'partnership' %}" method="post">
+            <button type="submit">
+                Socios
+                <img src="{% static 'components/partnership.png' %}" alt="Socios" class="partnership-icon">
+            </button>
+            {% csrf_token %}
+        </form>
         <form action="{% url 'logout' %}" method="post">
             <button type="submit">
                 Cerrar sesión
@@ -78,6 +78,6 @@
         </nav>
     </div>
     <!-- BODY CONTAINERS-->
-</body>
+<body>
 </body>
 </html>

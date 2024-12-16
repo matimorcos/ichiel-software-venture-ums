@@ -23,6 +23,7 @@
     </div>
 </div>
 <div class="dashboard">
+    <nav class="dashboard">
     <form action="{% url 'home' %}" method="post">
         <button type="submit">
             Inicio
@@ -38,6 +39,27 @@
         </button>
         {% csrf_token %}
     </form>
+    <form action="{% url 'notifications' %}" method="post">
+        <button type="submit">
+            Notificaciones
+            <img src="{% static 'components/notifications.png' %}" alt="Notificaciones" class="notifications-icon">
+        </button>
+        {% csrf_token %}
+    </form>
+    <form action="{% url 'mybookings' %}" method="post">
+        <button type="submit">
+            Mis Reservas
+            <img src="{% static 'components/mybookings.png' %}" alt="Mis Reservas" class="mybookings-icon">
+        </button>
+        {% csrf_token %}
+    </form>
+    <form action="{% url 'partnership' %}" method="post">
+        <button type="submit">
+            Socios
+            <img src="{% static 'components/partnership.png' %}" alt="Socios" class="partnership-icon">
+        </button>
+        {% csrf_token %}
+    </form>    
     <form action="{% url 'logout' %}" method="post">
         <button type="submit">
             Cerrar sesión
@@ -45,6 +67,7 @@
         </button>
         {% csrf_token %}
     </form>
+    </nav>
 </div>
 <!-- BODY CONTAINERS-->
 <body>

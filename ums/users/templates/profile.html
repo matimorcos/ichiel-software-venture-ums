@@ -21,7 +21,7 @@
     </script>
     <title>Editar Perfil</title>
 </head>
-<body>
+
     <!-- MAIN CONTAINERS -->
     <div class="index-top">
         <div class="logo-img">
@@ -32,6 +32,7 @@
         </div>
     </div>
     <div class="dashboard">
+        <nav class="dashboard">
         <form action="{% url 'home' %}" method="post">
             <button type="submit">
                 Inicio
@@ -46,6 +47,27 @@
             </button>
             {% csrf_token %}
         </form>
+        <form action="{% url 'notifications' %}" method="post">
+            <button type="submit">
+                Notificaciones
+                <img src="{% static 'components/notifications.png' %}" alt="Notificaciones" class="notifications-icon">
+            </button>
+            {% csrf_token %}
+        </form>
+        <form action="{% url 'mybookings' %}" method="post">
+            <button type="submit">
+                Mis Reservas
+                <img src="{% static 'components/mybookings.png' %}" alt="Mis Reservas" class="mybookings-icon">
+            </button>
+            {% csrf_token %}
+        </form>
+        <form action="{% url 'partnership' %}" method="post">
+            <button type="submit">
+                Socios
+                <img src="{% static 'components/partnership.png' %}" alt="Socios" class="partnership-icon">
+            </button>
+            {% csrf_token %}
+        </form>
         <form action="{% url 'logout' %}" method="post">
             <button type="submit">
                 Cerrar sesión
@@ -53,13 +75,15 @@
             </button>
             {% csrf_token %}
         </form>
+        </nav>
     </div>
     <!-- BODY CONTAINERS-->
+<body>
     <div class="profile-info">
         <form action="{% url 'profile' %}" method="post" class="profile-form">
             {% csrf_token %}
             
-            <h1>Perfil de {{ user.username }}</h1>
+            <h2>Perfil de {{ user.username }}</h2>
             
             <label for="email">Email:</label>
             <input type="email" name="email" id="email" value="{{ user.email }}" disabled>
@@ -93,9 +117,13 @@
             {% endfor %}
         </ul>
         {% endif %}
-            
-            <button type="button" class="btn btn-secondary" onclick="enableEdit()">Editar Perfil</button>
-            <button type="submit" class="btn btn-primary" id="save-btn" disabled>Guardar Cambios</button>
+            <button type="button" class="btn btn-secondary" onclick="enableEdit()">
+                Editar Perfil
+                <img src="{% static 'components/edit.png' %}" alt="Editar Perfil" class="edit-icon">
+            </button>
+            <button type="submit" class="btn btn-primary" id="save-btn" disabled>
+                Guardar Cambios
+            </button>
         </form>
     </div>
 </body>
