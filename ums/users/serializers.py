@@ -10,34 +10,34 @@ class RegisterSerializer(serializers.ModelSerializer):
         """Meta class for RegisterSerializer."""
         model = User
         fields = [
+            "address",
+            "birthdate",
+            "city",
+            "country",
             "email",
-            "username",
-            "password",
             "first_name",
             "last_name",
-            "birthdate",
-            "country",
-            "city",
-            "postal_code",
-            "address",
+            "password",
             "phone_number",
+            "postal_code",
             "role",
+            "username"
         ]
 
     def create(self, validated_data):
         """Create and return a new user."""
         user = User.objects.create_user(
-            email=validated_data["email"],
-            username=validated_data["username"],
-            password=validated_data["password"],
-            first_name=validated_data["first_name"],
-            last_name=validated_data["last_name"],
-            birthdate=validated_data.get("birthdate"),
-            country=validated_data["country"],
-            city=validated_data["city"],
-            postal_code=validated_data.get("postal_code"),
-            address=validated_data.get("address"),
-            phone_number=validated_data.get("phone_number"),
+            address = validated_data.get("address"),
+            birthdate = validated_data.get("birthdate"),
+            city = validated_data["city"],
+            country = validated_data["country"],
+            email = validated_data["email"],
+            first_name = validated_data["first_name"],
+            last_name = validated_data["last_name"],
+            password = validated_data["password"],
+            phone_number = validated_data.get("phone_number"),
+            postal_code = validated_data.get("postal_code"),
+            username = validated_data["username"],
         )
         return user
 
