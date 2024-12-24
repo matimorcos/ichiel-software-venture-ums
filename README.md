@@ -117,13 +117,34 @@ Successful User Search:
 - `GET /search-users/?query=a HTTP/1.1` 200
 
 Successful Profile (View):
-- `POST /profile/ HTTP/1.1"` 200
+- `POST /profile/ HTTP/1.1` 200
 
 Successful Profile (Edit):
 - `POST /profile/ HTTP/1.1` 200
 
+Successful Notifications (View):
+- `POST /notifications/ HTTP/1.1` 200
+
+Successful Bookings (View):
+- `POST /mybookings/ HTTP/1.1` 200
+
+Successful Partnership (View):
+- `POST /partnership/ HTTP/1.1` 302
+- `GET /partnership/ HTTP/1.1` 200
+
+Successfull Partnership (Create):
+- `POST /partnership/ HTTP/1.1` 302
+- `GET /partnership/ HTTP/1.1` 200
+
+Successfull Partnership (Delete):
+- `POST /partnership/ HTTP/1.1` 302
+- `GET /partnership/ HTTP/1.1` 200
+
+Successful About (View):
+- `POST /about/ HTTP/1.1` 200
+
 Successful Logout:
-- `POST /logout/ HTTP/1.1"` 302
+- `POST /logout/ HTTP/1.1` 302
 
 4) Logica de Negocio (Redireccion a 'project branch'):
 5) Estilo de codificacion:
@@ -137,12 +158,10 @@ Para más detalles sobre el diseno del sistema, consulta los diagramas en la car
 
 
 ## Installation and Configuration
-Sigue estos pasos para instalar y ejecutar el programa localmente.
 
 ## Use
 
 ## Testing
-En proximas iteraciones el usuario debera poder registrarse unicamente con su email mediante metodos de verificacion y autenticacion, y podra editar su perfil una vez loggeado, el cual contendra los campos requeridos para determinadas acciones dentro de la app. A su vez, tambien se deberan visualizarse los mensajes y botones con detalles para una UI mas intuitiva qe ofrezca una mejor experiencia.
 
 ## Contributions
 
