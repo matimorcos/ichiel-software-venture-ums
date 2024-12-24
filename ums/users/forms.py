@@ -1,5 +1,5 @@
 from django import forms
-from .models import User
+from .models import User, Provider
 
 class LoginForm(forms.ModelForm):
     """Custom authentication form for username login."""
@@ -23,4 +23,7 @@ class ProfileForm(forms.ModelForm):
         model=User
         fields=['email','first_name', 'last_name', 'birthdate', 'country', 'city', 'postal_code', 'address', 'phone_number']   
 
-    
+class ProviderForm(forms.ModelForm):
+    class Meta:
+        model=Provider
+        fields=['is_approved']

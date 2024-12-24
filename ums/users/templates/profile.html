@@ -68,6 +68,13 @@
             </button>
             {% csrf_token %}
         </form>
+        <form action="{% url 'about' %}" method="post">
+            <button type="submit">
+                About
+                <img src="{% static 'components/about.png' %}" alt="About" class="about-icon">
+            </button>
+            {% csrf_token %}
+        </form>  
         <form action="{% url 'logout' %}" method="post">
             <button type="submit">
                 Cerrar sesión

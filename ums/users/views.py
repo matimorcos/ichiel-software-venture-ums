@@ -1,5 +1,5 @@
-from .forms import LoginForm, RegisterForm, ProfileForm
-from .models import User, UserManager, Profile
+from .forms import LoginForm, RegisterForm, ProfileForm, ProviderForm
+from .models import User, UserManager, Profile, Provider
 from .serializers import RegisterSerializer, LoginSerializer
 from rest_framework import generics, status
 from rest_framework.views import APIView, View
@@ -191,10 +191,44 @@ class MyBookingsTemplateView(View):
 @method_decorator(login_required, name='dispatch')
 class PartnershipTemplateView(View):
     template_name = 'partnership.html'
+
+    def get(self, request):
+        try:
+            provider = Provider.objects.get(user=request.user)
+            is_provider = True
+        except Provider.DoesNotExist:
+            provider = None
+            is_provider = False
+        return render(request, self.template_name, {'is_provider': is_provider, 'provider': provider})
+
+    def post(self, request):
+        if 'cancel_partnership' in request.POST:
+            try:
+                provider = Provider.objects.get(user=request.user)
+                provider.delete()
+                request.user.is_staff = False
+                request.user.save()
+                messages.success(request, 'Has cancelado tu asociación.')
+            except Provider.DoesNotExist:
+                messages.error(request, 'No tienes una asociación activa.')
+        elif 'accept_terms' in request.POST:
+            provider, created = Provider.objects.get_or_create(user=request.user)
+            provider.is_approved = True
+            provider.save()
+            request.user.is_staff = True
+            request.user.save()
+            messages.success(request, 'Has sido aprobado como socio.')
+        else:
+            messages.error(request, 'Debes aceptar los términos y condiciones.')
+        return redirect('partnership')
+
+@method_decorator(login_required, name='dispatch')    
+class AboutTemplateView(View):
+    template_name = 'about.html'
     
     def get(self, request):
         return render(request, self.template_name, {'user': request.user})
-
+    
     def post(self, request):
         return render(request, self.template_name, {'user': request.user})
     

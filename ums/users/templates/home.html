@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- DJANGO STATIC -->
     {% load static %}
+    <!-- CRISPY FORMS -->
     {% load crispy_forms_tags %}
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
@@ -29,7 +30,9 @@
             Inicio
             <img src="{% static 'components/home.png' %}" alt="Inicio" class="home-icon">
         </button>
+        <!-- CSRF TOKEN -->
         {% csrf_token %}
+        <!-- CRISPY FORMS -->
         {{ form|crispy }}
     </form>
     <form action="{% url 'profile' %}" method="post">
@@ -57,6 +60,13 @@
         <button type="submit">
             Socios
             <img src="{% static 'components/partnership.png' %}" alt="Socios" class="partnership-icon">
+        </button>
+        {% csrf_token %}
+    </form>    
+    <form action="{% url 'about' %}" method="post">
+        <button type="submit">
+            About
+            <img src="{% static 'components/about.png' %}" alt="About" class="about-icon">
         </button>
         {% csrf_token %}
     </form>    
