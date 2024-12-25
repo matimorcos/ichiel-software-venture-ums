@@ -28,7 +28,7 @@
             <img src="{% static 'components/logo2.png' %}">
         </div>
         <div class="titles-txt">
-            <h1>Reservas de {{ user.username }}</h1>
+            <h1>Perfil</h1>
         </div>
     </div>
     <div class="dashboard">
@@ -44,13 +44,6 @@
             <button type="submit">
                 Perfil
                 <img src="{% static 'components/profile.png' %}" alt="Perfil" class="profile-icon">
-            </button>
-            {% csrf_token %}
-        </form>
-        <form action="{% url 'teams' %}" method="post">
-            <button type="submit">
-                Equipos
-                <img src="{% static 'components/teams.png' %}" alt="Equipos" class="teams-icon">
             </button>
             {% csrf_token %}
         </form>
@@ -93,5 +86,11 @@
     </div>
     <!-- BODY CONTAINERS-->
 <body>
+            <div class="about-text">
+                <h2>¿Quienes somos?</h2>
+                <p>Somos una empresa que se dedica a la gestión de reservas de instalaciones deportivas. Nuestro objetivo es facilitar las reservas a los usuarios y ofrecer un servicio de calidad a los clubes.</p>
+            </div>
+
 </body>
+
 </html>

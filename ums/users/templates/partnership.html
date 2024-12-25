@@ -28,7 +28,7 @@
             <img src="{% static 'components/logo2.png' %}">
         </div>
         <div class="titles-txt">
-            <h1>Perfil</h1>
+            <h1>Asociaciones de {{ user.username }}</h1>
         </div>
     </div>
     <div class="dashboard">
@@ -44,6 +44,13 @@
             <button type="submit">
                 Perfil
                 <img src="{% static 'components/profile.png' %}" alt="Perfil" class="profile-icon">
+            </button>
+            {% csrf_token %}
+        </form>
+        <form action="{% url 'teams' %}" method="post">
+            <button type="submit">
+                Equipos
+                <img src="{% static 'components/teams.png' %}" alt="Equipos" class="teams-icon">
             </button>
             {% csrf_token %}
         </form>
@@ -68,6 +75,13 @@
         </button>
         {% csrf_token %}
     </form>
+    <form action="{% url 'about' %}" method="post">
+        <button type="submit">
+            About
+            <img src="{% static 'components/about.png' %}" alt="About" class="about-icon">
+        </button>
+        {% csrf_token %}
+    </form>  
         <form action="{% url 'logout' %}" method="post">
             <button type="submit">
                 Cerrar sesión
@@ -79,5 +93,33 @@
     </div>
     <!-- BODY CONTAINERS-->
 </body>
+<div class="partner-info">
+    <form action="{% url 'partnership' %}" method="post" class="partner-form">
+        {% csrf_token %}
+        
+        <h2>Información de socio: {{ user.username }}</h2>
+        
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" value="{{ user.email }}" disabled>
+        
+        <label for="first_name">Nombre:</label>
+        <input type="text" name="first_name" id="first_name" value="{{ user.first_name }}" disabled>
+        
+        <label for="last_name">Apellido:</label>
+        <input type="text" name="last_name" id="last_name" value="{{ user.last_name }}" disabled>
+        
+        {% if is_provider %}
+            <p>Ya eres socio.</p>
+            <button type="submit" name="cancel_partnership">Cancelar asociación</button>
+        {% else %}
+            <label for="accept_terms">
+                <input type="checkbox" name="accept_terms" id="accept_terms" required>
+                Acepto los términos y condiciones
+            </label>
+            <button type="submit">Asociarme</button>
+        {% endif %}
+
+    </form>
+</div>
 </body>
 </html>

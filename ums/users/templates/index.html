@@ -37,13 +37,12 @@
         <form action="{% url 'login' %}" method="POST">
         <!-- CSRF TOKEN -->
         {% csrf_token %}
-
+        <!-- CRISPY FORMS -->
         {{ form|crispy }}
         <!-- ERROR MESSAGE -->
         {% if error %}
             <p style="color: red;">{{ error }}</p>
         {% endif %}
-        
         <button type="submit">Iniciar Sesión</button>
         <p style="color:blue;">No tienes una cuenta?</p>
         <!-- REGISTER PAGE LINK -->
@@ -51,4 +50,17 @@
         </form>
     </div>  
 </body>
+<footer>
+    <div class="footer">
+        <p>Ichiel Software Venture © 2024. Todos los derechos reservados</p>
+        <div class="social-links">
+            <a href="https://github.com/matimorcos" target="_blank">
+                <img src="{% static 'components/github.png' %}" alt="GitHub" style="width: 48px; height: 32px;">
+            </a>
+            <a href="https://www.linkedin.com/in/matias-morcos-mm" target="_blank">
+                <img src="{% static 'components/linkedin.png' %}" alt="LinkedIn" style="width: 48px; height: 32px;">
+            </a>
+        </div>
+    </div>
+</footer>
 </html>

@@ -13,6 +13,15 @@
     <title>Ichiel Software Venture</title>
     <!-- JQUERY -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- JS -->
+    <script>
+        function enableEdit(teamId) {
+            document.getElementById('name-' + teamId).disabled = false;
+            document.getElementById('sport-' + teamId).disabled = false;
+            document.getElementById('player_count-' + teamId).disabled = false;
+            document.getElementById('save-' + teamId).style.display = 'inline';
+        }
+    </script>
 </head>
 <!-- MAIN CONTAINERS -->
 <div class = "index-top">
@@ -20,7 +29,7 @@
         <img src="{% static 'components/logo2.png' %}">
     </div>
     <div class = "titles-txt">
-        <h1>Bienvenido {{ user.username }}!</h1>
+        <h1>Equipos de {{ user.username }}</h1>
     </div>
 </div>
 <div class="dashboard">
@@ -30,10 +39,7 @@
             Inicio
             <img src="{% static 'components/home.png' %}" alt="Inicio" class="home-icon">
         </button>
-        <!-- CSRF TOKEN -->
         {% csrf_token %}
-        <!-- CRISPY FORMS -->
-        {{ form|crispy }}
     </form>
     <form action="{% url 'profile' %}" method="post">
         <button type="submit">
@@ -88,25 +94,31 @@
 </div>
 <!-- BODY CONTAINERS-->
 <body>
-    <!-- MESSAGES -->
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li class="{{ message.tags }}">{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    <div class="search-container">
-        <div class="search-bar">
-            <input type="text" id="search-input" placeholder="Buscar usuarios...">
-            <div id="search-results" class="search-results"></div>
-        </div>
+    <div class="teams-container">
+        <h2 class="create-team">Crear equipo</h1>
+        <form method="post" action="{% url 'teams' %}" class="team-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" name="create_team">Create Team</button>
+        </form>
+
+        <h2>Tus Equipos</h2>
+        <ul>
+            {% for team in teams %}
+                <li>
+                    <form method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="team_id" value="{{ team.id }}">
+                        <input type="text" id="name-{{ team.id }}" name="name" value="{{ team.name }}" disabled>
+                        <input type="text" id="sport-{{ team.id }}" name="sport" value="{{ team.sport }}" disabled>
+                        <input type="number" id="player_count-{{ team.id }}" name="player_count" value="{{ team.player_count }}" disabled>
+                        <button type="button" onclick="enableEdit('{{ team.id }}')">Editar</button>
+                        <button type="submit" name="delete_team">Eliminar</button>
+                        <button type="submit" name="edit_team" id="save-{{ team.id }}" style="display:none;">Guardar Cambios</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
-    <div class="feed">
-        <div class="feed-img">
-            <img src="{% static 'components/feed.png' %}">
-        </div>
-    </div>
-    <script src="{% static 'js/search.js' %}"></script>
 </body>
 </html>

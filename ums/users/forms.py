@@ -1,5 +1,5 @@
 from django import forms
-from .models import User
+from .models import User, Provider, Team
 
 class LoginForm(forms.ModelForm):
     """Custom authentication form for username login."""
@@ -21,6 +21,16 @@ class RegisterForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model=User
-        fields=['email','first_name', 'last_name', 'birthdate', 'country', 'city', 'postal_code', 'address', 'phone_number']   
+        fields=['address', 'birthdate', 'city', 'country', 'email', 'first_name', 'last_name', 'phone_number', 'postal_code']   
 
-    
+class ProviderForm(forms.ModelForm):
+    class Meta:
+        model=Provider
+        fields=['is_approved']
+        
+class TeamForm(forms.ModelForm):
+    team_id = forms.CharField(widget=forms.HiddenInput(), required=False)
+
+    class Meta:
+        model = Team
+        fields = ['name', 'player_count', 'sport',]
