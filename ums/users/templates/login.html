@@ -37,6 +37,13 @@
         </button>
         {% csrf_token %}
     </form>
+    <form action="{% url 'teams' %}" method="post">
+        <button type="submit">
+            Equipos
+            <img src="{% static 'components/teams.png' %}" alt="Equipos" class="teams-icon">
+        </button>
+        {% csrf_token %}
+    </form>
     <form action="{% url 'notifications' %}" method="post">
         <button type="submit">
             Notificaciones

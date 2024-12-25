@@ -1,12 +1,12 @@
-from .forms import LoginForm, RegisterForm, ProfileForm, ProviderForm
-from .models import User, UserManager, Profile, Provider
+from .forms import LoginForm, RegisterForm, ProfileForm, ProviderForm, TeamForm
+from .models import User, UserManager, Profile, Provider, Team
 from .serializers import RegisterSerializer, LoginSerializer
 from rest_framework import generics, status
 from rest_framework.views import APIView, View
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
@@ -169,6 +169,36 @@ class ProfileTemplateView(View):
                     messages.error(request, f"{field}: {error}")
                     
         return render(request, self.template_name, {'form': form})
+
+class TeamTemplateView(View):
+    template_name = 'teams.html'
+
+    def get(self, request):
+        teams = Team.objects.filter(user=request.user)
+        form = TeamForm()
+        return render(request, self.template_name, {'teams': teams, 'form': form})
+
+    def post(self, request):
+        form = TeamForm(request.POST)
+        if 'create_team' in request.POST:
+            if form.is_valid():
+                team = form.save(commit=False)
+                team.user = request.user
+                team.save()
+                return redirect('teams')
+        elif 'edit_team' in request.POST:
+            team = get_object_or_404(Team, id=request.POST.get('team_id'), user=request.user)
+            form = TeamForm(request.POST, instance=team)
+            if form.is_valid():
+                form.save()
+                return redirect('teams')
+        elif 'delete_team' in request.POST:
+            team = get_object_or_404(Team, id=request.POST.get('team_id'), user=request.user)
+            team.delete()
+            return redirect('teams')
+        
+        teams = Team.objects.filter(user=request.user)
+        return render(request, self.template_name, {'teams': teams, 'form': form})
 
 class NotificationsTemplateView(View):
     template_name = 'notifications.html'

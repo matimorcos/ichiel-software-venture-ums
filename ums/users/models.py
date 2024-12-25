@@ -132,6 +132,16 @@ class Provider(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class Team(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    sport = models.CharField(max_length=100)
+    player_count = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.name
+    
     
 """class Notification(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

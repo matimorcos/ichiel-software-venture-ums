@@ -122,6 +122,22 @@ Successful Profile (View):
 Successful Profile (Edit):
 - `POST /profile/ HTTP/1.1` 200
 
+Successful Teams (View):
+- `GET /teams/ HTTP/1.1`200
+- `POST /teams/ HTTP/1.1` 200
+
+Successful Teams (Create):
+- `POST /teams/ HTTP/1.1` 302
+- `GET /teams/ HTTP/1.1`200
+
+Successful Teams (Edit):
+- `POST /teams/ HTTP/1.1` 302
+- `GET /teams/ HTTP/1.1`200
+
+SuccessfulTeams (Delete):
+- `POST /teams/ HTTP/1.1` 302
+- `GET /teams/ HTTP/1.1`200
+
 Successful Notifications (View):
 - `POST /notifications/ HTTP/1.1` 200
 
@@ -160,6 +176,18 @@ Para más detalles sobre el diseno del sistema, consulta los diagramas en la car
 ## Installation and Configuration
 
 ## Use
+La aplicacion cuenta con las siguientes caracteristicas:
+Registro de usuarios
+Login de usuarios
+Busqueda de usuarios en el feed (home)
+Vista y administracion de perfil del usuario
+Vista "About" de equipo de desarrollo
+Vista de equipos del usuario
+Administracion de equipos del usuario
+CRUD de usuarios
+CRUD de perfil de usuarios
+CRUD de equipos
+CRUD de permisos de partner (staff)
 
 ## Testing
 
