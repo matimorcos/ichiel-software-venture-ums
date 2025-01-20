@@ -43,6 +43,8 @@ ums/users/migrations
 ums/ums/settings.py
 ums/ums/asgi.py
 ums/ums/wsgi.py
+ums/users/frontend
+ms-users-icl
 
 # Installer logs
 pip-log.txt

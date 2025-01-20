@@ -21,7 +21,7 @@ from users.views import LoginTemplateView, LoginAPIView, RegisterTemplateView, R
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', LoginTemplateView.as_view(), name='login'),
-    #path('login/', LoginAPIView.as_view(), name='login'),
+    #path('login/', LoginAPIView.as_view(), name='login'), USE ONLY FOR API OR SPLIT CATEGORY PATHS
     #path('register/', RegisterTemplateView.as_view(), name='register'),
     path('register/', RegisterSerializerTemplateView.as_view(), name='register'),
     path('home/', HomeTemplateView.as_view(), name='home'),
